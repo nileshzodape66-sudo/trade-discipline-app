@@ -1,11 +1,15 @@
 {
-  "background_color": "#ffffff",
-  "dir": "ltr",
+  "name": "Daily Trading Discipline",
+  "short_name": "Trade Discipline",
+  "start_url": ".",
   "display": "standalone",
-  "name": "nileshzodape66-sudo.github",
-  "orientation": "any",
-  "scope": "/",
-  "short_name": "nileshzodape66-sudo.github",
-  "start_url": "/",
-  "theme_color": "#ffffff"
+  "background_color": "#ffffff",
+  "theme_color": "#0d6efd",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
