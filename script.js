@@ -1,18 +1,26 @@
 const rules = [
-  "Protect capital first",
+  "Loss control is profit control",
   "No trade is also a trade",
+  "Protect capital first",
   "Discipline beats strategy",
-  "One good trade is enough",
-  "Survive to trade tomorrow"
+  "Trade less, trade better"
 ];
 
+// Rule of the day
 document.getElementById("rule").innerText =
-  rules[Math.floor(Math.random() * rules.length)];
+  rules[new Date().getDate() % rules.length];
 
+// Load saved notes
+const notesEl = document.getElementById("notes");
+notesEl.value = localStorage.getItem("trade_notes") || "";
+
+// Save notes
 function saveNotes() {
-  localStorage.setItem("notes", document.getElementById("notes").value);
-  alert("Saved");
+  localStorage.setItem("trade_notes", notesEl.value);
+  alert("Notes saved successfully!");
 }
 
-document.getElementById("notes").value =
-  localStorage.getItem("notes") || "";
+// Register Service Worker
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
