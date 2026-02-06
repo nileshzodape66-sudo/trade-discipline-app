@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trade Discipline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 16px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .disclaimer {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 25px;
+      font-size: 18px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      font-size: 14px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Daily Trading Discipline</h1>
+
+    <p class="disclaimer">
+      This app is for educational and self-discipline purposes only.
+      No financial or trading advice is provided.
+    </p>
+
+    <h2>Checklist</h2>
+
+    <label><input type="checkbox"> Max loss defined</label>
+    <label><input type="checkbox"> No revenge trading</label>
+    <label><input type="checkbox"> Trade only planned setups</label>
+    <label><input type="checkbox"> Stop after 2 losses</label>
+
+    <h2>Rule of the Day</h2>
+    <p id="rule"></p>
+
+    <h2>Notes</h2>
+    <textarea id="notes" placeholder="Write your thoughts..."></textarea>
+    <button onclick="saveNotes()">Save Notes</button>
+
+    <div class="footer">
+      Trade Discipline • Build consistency, not emotions
+    </div>
+
+  </div>
+
+  <script>
+    const rules = [
+      "No trade is also a trade",
+      "Protect capital first",
+      "Process over profits",
+      "One good trade is enough",
+      "Discipline creates freedom",
+      "Wait for confirmation, not excitement",
+      "Loss control is profit control"
+    ];
+
+    const ruleElement = document.getElementById("rule");
+    const notesElement = document.getElementById("notes");
+
+    // Load rule of the day
+    const today = new Date().getDate();
+    ruleElement.innerText = rules[today % rules.length];
+
+    // Load saved notes
+    notesElement.value = localStorage.getItem("tradeNotes") || "";
+
+    function saveNotes() {
+      localStorage.setItem("tradeNotes", notesElement.value);
+      alert("Notes saved successfully");
+    }
+  </script>
+</body>
+</html>
