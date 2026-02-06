@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Trade Discipline</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Daily Trading Discipline</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d6efd" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-512.png">
 
   <style>
     body {
@@ -18,27 +24,26 @@
       margin: auto;
       background: #ffffff;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
-    .disclaimer {
+    .subtitle {
+      text-align: center;
       font-size: 13px;
       color: #666;
-      text-align: center;
       margin-bottom: 20px;
     }
 
     h2 {
-      margin-top: 25px;
-      font-size: 18px;
       border-bottom: 1px solid #ddd;
-      padding-bottom: 5px;
+      padding-bottom: 6px;
+      margin-top: 24px;
     }
 
     label {
@@ -49,34 +54,40 @@
 
     textarea {
       width: 100%;
-      height: 120px;
+      min-height: 120px;
       padding: 10px;
       font-size: 14px;
-      border-radius: 5px;
+      border-radius: 6px;
       border: 1px solid #ccc;
       resize: vertical;
     }
 
     button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      font-size: 14px;
-      background: #007bff;
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: #0d6efd;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      font-size: 14px;
       cursor: pointer;
     }
 
     button:hover {
-      background: #0056b3;
+      background: #0b5ed7;
     }
 
-    .footer {
-      margin-top: 20px;
+    .rule {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #0d6efd;
+    }
+
+    footer {
       text-align: center;
       font-size: 12px;
       color: #888;
+      margin-top: 24px;
     }
   </style>
 </head>
@@ -85,56 +96,52 @@
   <div class="container">
 
     <h1>Daily Trading Discipline</h1>
-
-    <p class="disclaimer">
-      This app is for educational and self-discipline purposes only.
-      No financial or trading advice is provided.
-    </p>
+    <div class="subtitle">
+      Educational & self-discipline app. No financial advice.
+    </div>
 
     <h2>Checklist</h2>
-
     <label><input type="checkbox"> Max loss defined</label>
     <label><input type="checkbox"> No revenge trading</label>
     <label><input type="checkbox"> Trade only planned setups</label>
     <label><input type="checkbox"> Stop after 2 losses</label>
 
     <h2>Rule of the Day</h2>
-    <p id="rule"></p>
+    <div class="rule" id="rule"></div>
 
     <h2>Notes</h2>
     <textarea id="notes" placeholder="Write your thoughts..."></textarea>
+    <br>
     <button onclick="saveNotes()">Save Notes</button>
 
-    <div class="footer">
-      Trade Discipline • Build consistency, not emotions
-    </div>
-
+    <footer>
+      Built for consistency. One disciplined day at a time.
+    </footer>
   </div>
 
   <script>
     const rules = [
+      "Loss control is profit control",
       "No trade is also a trade",
       "Protect capital first",
-      "Process over profits",
-      "One good trade is enough",
-      "Discipline creates freedom",
-      "Wait for confirmation, not excitement",
-      "Loss control is profit control"
+      "Discipline beats strategy",
+      "Trade less, trade better"
     ];
 
-    const ruleElement = document.getElementById("rule");
-    const notesElement = document.getElementById("notes");
+    document.getElementById("rule").innerText =
+      rules[new Date().getDate() % rules.length];
 
-    // Load rule of the day
-    const today = new Date().getDate();
-    ruleElement.innerText = rules[today % rules.length];
-
-    // Load saved notes
-    notesElement.value = localStorage.getItem("tradeNotes") || "";
+    const notesEl = document.getElementById("notes");
+    notesEl.value = localStorage.getItem("trade_notes") || "";
 
     function saveNotes() {
-      localStorage.setItem("tradeNotes", notesElement.value);
-      alert("Notes saved successfully");
+      localStorage.setItem("trade_notes", notesEl.value);
+      alert("Notes saved!");
+    }
+
+    // Register service worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
     }
   </script>
 </body>
